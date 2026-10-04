@@ -20,7 +20,7 @@ User query -> Decomposition + Rewrite -> Retrieval -> Bias check -> Final answer
 
 ## Datasets
 
-The pipeline works with a wide range of datasets rather than a single benchmark:
+The pipeline works with a wide range of datasets rather than a single benchmark. Some of the datasets used includes:
 
 - **Wikipedia:** used as a retrieval corpus for supporting context.
 - **BBQ (Bias Benchmark for QA):** a question-answering benchmark for measuring social bias.
