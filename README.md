@@ -1,27 +1,54 @@
-Pls do not commit API keys or data on github
+# RAG Bias Mitigation
 
-[![Python 3.8+](https://img.shields.io/badge/python-3.8+-blue.svg)](https://www.python.org/downloads/)
-[![OpenAI](https://img.shields.io/badge/OpenAI-API-green.svg)](https://openai.com/api/)
+A Python pipeline that decomposes and rewrites user queries, retrieves supporting context, and checks generated answers for social bias in retrieval-augmented generation (RAG) systems.
 
-> ** Security First**: This tool uses environment variables for API keys. Never commit API keys to version control!
+## Problem
 
+RAG systems ground language model answers in retrieved documents, but retrieved context can carry and amplify social bias. This project explores how to detect that bias and reduce it before an answer reaches the user.
 
-### 1. Install Dependencies
-```bash
-pip install -r requirements.txt
+## Approach
+
+The pipeline runs in three stages:
+
+1. **Query decomposition and rewriting:** An input question is broken into smaller sub-queries using the OpenAI API, and each sub-query is rewritten [describe the goal, e.g. to remove biased framing or improve retrieval], so each part can be retrieved and checked on its own.
+2. **Retrieval:** Relevant context is retrieved for each sub-query using BM25 keyword search [and embedding-based vector similarity scoring against labeled fairness benchmarks -- keep only what your code does].
+3. **Bias check:** Retrieved context and generated answers are evaluated for bias [describe your method here, e.g. prompt-based classifier, similarity to labeled biased examples, mitigation step].
+
+```
+User query -> Decomposition + Rewrite -> Retrieval -> Bias check -> Final answer
 ```
 
-### 2. Set API Key
-Add a .env file and insert the line
+## Datasets
+
+The pipeline works with a wide range of datasets rather than a single benchmark:
+
+- **Wikipedia:** used as a retrieval corpus for supporting context.
+- **BBQ (Bias Benchmark for QA):** a question-answering benchmark for measuring social bias.
+- **BibleQA:** a question-answering dataset included in the repo.
+
+## Project structure
+
 ```
-OPENAI_KEY=<your-api-key>
-```
-
-
-### 3. Run Queries
-```bash
-# Single query
-python main.py
-
-#then input your query and the script will decompose the question and check for bias
+.
+|-- main.py              # Entry point: run the full pipeline on a query
+|-- src/
+|   |-- decomposition.py         # Query decomposition [and rewriting -- confirm]
+|   |-- embedders.py             # Embedding models for retrieval
+|   |-- bias_detection.py        # Bias detection on retrieved context and answers
+|   |-- bias_grps.py             # Bias group definitions
+|   |-- metrics.py               # Fairness and evaluation metrics
+|   |-- experiments.py           # Experiment runner
+|   |-- baseline-ASRank.py       # Baseline for comparison
+|   |-- multi_dataset_loader.py  # Loaders for multiple datasets (Wikipedia, BBQ, ...)
+|   |-- client.py, db.py         # LLM client and storage helpers
+|   |-- LLM_extract/             # LLM-based extraction pipeline and experiments
+|   |-- updated/                 # Latest pipeline (new_pipeline.py) and full evaluations
+|-- debiasing-rag/       # [one-line description of this folder]
+|-- BBQ/                 # BBQ benchmark data
+|-- BibleQA/             # BibleQA question-answering data
+|-- corpus_data/         # Retrieval corpus data
+|-- bm25_example.py      # BM25 retrieval example
+|-- rag_example.txt      # Example RAG prompt/output
+|-- setup.sh, experiment.sh, environment_check.py   # Environment setup and experiment scripts
+|-- requirements.txt
 ```
