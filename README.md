@@ -10,7 +10,7 @@ RAG systems ground language model answers in retrieved documents, but retrieved 
 
 The pipeline runs in three stages:
 
-1. **Query decomposition and rewriting:** An input question is broken into smaller sub-queries using the OpenAI API, and each sub-query is rewritten to remove bias framing and improve retrieval, so each part can be retrieved and checked on its own.
+1. **Query decomposition and rewriting:** An input question is broken into smaller sub-queries using the OpenAI API, and each sub-query is rewritten to remove biased framing and improve retrieval, so each part can be retrieved and checked on its own.
 2. **Retrieval:** Relevant context is retrieved for each sub-query using BM25 keyword search and embedding-based vector similarity scoring against labeled fairness benchmarks.
 3. **Bias check:** Retrieved context and generated answers are evaluated for bias.
 
@@ -20,11 +20,11 @@ User query -> Decomposition + Rewrite -> Retrieval -> Bias check -> Final answer
 
 ## Datasets
 
-The pipeline works with a wide range of datasets rather than a single benchmark. Some of the datasets used includes:
+The pipeline works with a wide range of datasets rather than a single benchmark. Some of the datasets used include:
 
 - **Wikipedia:** used as a retrieval corpus for supporting context.
 - **BBQ (Bias Benchmark for QA):** a question-answering benchmark for measuring social bias.
-- **BibleQA:** a question-answering dataset included in the repo.
+- **BibleQA:** a question-answering dataset used to examine bias in religious texts and how LLMs respond to them.
 
 ## Project structure
 
