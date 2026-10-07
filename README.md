@@ -32,9 +32,9 @@ The pipeline works with a wide range of datasets rather than a single benchmark.
 .
 |-- main.py              # Entry point: run the full pipeline on a query
 |-- src/
-|   |-- decomposition.py         # Query decomposition [and rewriting -- confirm]
+|   |-- decomposition.py         # Query decomposition 
 |   |-- embedders.py             # Embedding models for retrieval
-|   |-- bias_detection.py        # Bias detection on retrieved context and answers
+|   |-- bias_detection.py        # Bias detection on sub-queries 
 |   |-- bias_grps.py             # Bias group definitions
 |   |-- metrics.py               # Fairness and evaluation metrics
 |   |-- experiments.py           # Experiment runner
