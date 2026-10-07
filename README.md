@@ -6,6 +6,30 @@ A Python pipeline that decomposes and rewrites user queries, retrieves supportin
 
 RAG systems ground language model answers in retrieved documents, but retrieved context can carry and amplify social bias. This project explores how to detect that bias and reduce it before an answer reaches the user.
 
+## Quick start
+
+> **Security:** API keys are read from environment variables. Never commit keys to version control.
+
+1. Install dependencies:
+
+```
+   pip install -r requirements.txt
+```
+
+2. Create a `.env` file in the project root and add your key:
+
+```
+   OPENAI_KEY=<your-api-key>
+```
+
+3. Run a query:
+
+```
+   python main.py
+```
+
+   Then enter your query. The script decomposes the question and checks for bias.
+
 ## Approach
 
 The pipeline runs in three stages:
