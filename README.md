@@ -12,7 +12,7 @@ The pipeline runs in three stages:
 
 1. **Query decomposition and rewriting:** An input question is broken into smaller sub-queries using the OpenAI API, and each sub-query is rewritten to remove biased framing and improve retrieval, so each part can be retrieved and checked on its own.
 2. **Retrieval:** Relevant context is retrieved for each sub-query using BM25 keyword search and embedding-based vector similarity scoring against labeled fairness benchmarks.
-3. **Bias check:** Retrieved context and generated answers are evaluated for bias.
+3. **Bias check:** Each sub-query is screened for demographic bias (gender, race, age, etc.) using an LLM-based classifier that labels it biased or neutral."
 
 ```
 User query -> Decomposition + Rewrite -> Retrieval -> Bias check -> Final answer
