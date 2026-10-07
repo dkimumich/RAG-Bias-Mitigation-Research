@@ -10,9 +10,9 @@ RAG systems ground language model answers in retrieved documents, but retrieved 
 
 The pipeline runs in three stages:
 
-1. **Query decomposition and rewriting:** An input question is broken into smaller sub-queries using the OpenAI API, and each sub-query is rewritten [describe the goal, e.g. to remove biased framing or improve retrieval], so each part can be retrieved and checked on its own.
-2. **Retrieval:** Relevant context is retrieved for each sub-query using BM25 keyword search [and embedding-based vector similarity scoring against labeled fairness benchmarks -- keep only what your code does].
-3. **Bias check:** Retrieved context and generated answers are evaluated for bias [describe your method here, e.g. prompt-based classifier, similarity to labeled biased examples, mitigation step].
+1. **Query decomposition and rewriting:** An input question is broken into smaller sub-queries using the OpenAI API, and each sub-query is rewritten to remove bias framing and improve retrieval, so each part can be retrieved and checked on its own.
+2. **Retrieval:** Relevant context is retrieved for each sub-query using BM25 keyword search and embedding-based vector similarity scoring against labeled fairness benchmarks.
+3. **Bias check:** Retrieved context and generated answers are evaluated for bias.
 
 ```
 User query -> Decomposition + Rewrite -> Retrieval -> Bias check -> Final answer
